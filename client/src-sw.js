@@ -28,4 +28,25 @@ registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // TODO: Implement asset caching
 
-registerRoute();
+registerRoute(
+  ({ request }) => {
+    if (request.mode === 'navigate') {
+      return true; // Always try to load navigation requests from the network
+    }
+
+    const destination = request.destination;
+    return ['style', 'script', 'worker'].includes(destination);
+  },
+  new CacheFirst({
+    cacheName: 'asset-cache',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 30 * 24 * 60 * 60,
+      }),
+    ],
+  })
+);
