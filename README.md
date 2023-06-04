@@ -21,8 +21,10 @@ A Note App for the Note Taker on the Go
 # Credits 
 - Ramblr started as a repository for an app known as JATE. The starter code can be found here: 
 https://github.com/coding-boot-camp/cautious-meme
+- I also used Midjourney Ai to produce the image for the Icon 
 
 # Links 
 - Repository: 
 https://github.com/Edwardwells87/TheRamblr
 - Live App: 
+https://ramblr.herokuapp.com/
