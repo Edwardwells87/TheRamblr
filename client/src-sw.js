@@ -24,19 +24,14 @@ warmStrategyCache({
   strategy: pageCache,
 });
 
-registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
+registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 // TODO: Implement asset caching
 
 registerRoute(
-  ({ request }) => {
-    if (request.mode === 'navigate') {
-      return true; // Always try to load navigation requests from the network
-    }
+  ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
 
-    const destination = request.destination;
-    return ['style', 'script', 'worker'].includes(destination);
-  },
+   
   new CacheFirst({
     cacheName: 'asset-cache',
     plugins: [
@@ -44,7 +39,6 @@ registerRoute(
         statuses: [0, 200],
       }),
       new ExpirationPlugin({
-        maxEntries: 50,
         maxAgeSeconds: 30 * 24 * 60 * 60,
       }),
     ],
