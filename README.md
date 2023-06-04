@@ -2,7 +2,7 @@
 
 A Note App for the Note Taker on the Go 
 
-![Screen Shot](./Assets/MicroManagerScreenShot.png)
+![Screen Shot](./client/src/images/screencapture.png)
 
 ## Features 
 - **Comprehensive Overview** Ramblr is a simple note taking app for those of us with a wanderlust
